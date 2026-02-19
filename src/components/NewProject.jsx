@@ -1,12 +1,14 @@
-import { useRef } from 'react';
+import React from 'react';
+import { ProjectContext } from '../store/project-context';
 import Input from "./Input";
 import Modal from "./Modal";
 
-export default function NewProject({ onAdd, onCancel }) {
-    const title = useRef();
-    const description = useRef();
-    const dueDate = useRef();
-    const modal = useRef();
+export default function NewProject() {
+    const { addProject, cancelAddProject } = React.useContext(ProjectContext);
+    const title = React.useRef();
+    const description = React.useRef();
+    const dueDate = React.useRef();
+    const modal = React.useRef();
 
     function handleSave() {
         const enteredTitle = title.current.value;
@@ -18,7 +20,7 @@ export default function NewProject({ onAdd, onCancel }) {
             return;
         }
 
-        onAdd({
+        addProject({
             title: enteredTitle,
             description: enteredDescription,
             dueDate: enteredDueDate
@@ -31,10 +33,11 @@ export default function NewProject({ onAdd, onCancel }) {
                 <h2 className="text-xl font-bold text-slate-200 mb-2">Invalid Input</h2>
                 <p className="text-slate-400">Please provide a value for every field.</p>
             </Modal>
+
             <div className="w-full max-w-[45rem] mt-16 mx-auto px-8">
                 <menu className="flex items-center justify-end gap-6 my-6">
                     <li>
-                        <button className="text-slate-400 hover:text-slate-200 font-medium" onClick={onCancel}>
+                        <button className="text-slate-400 hover:text-slate-200 font-medium" onClick={cancelAddProject}>
                             Cancel
                         </button>
                     </li>
