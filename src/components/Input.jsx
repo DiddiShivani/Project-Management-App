@@ -1,15 +1,18 @@
-import { forwardRef } from "react"
+import { forwardRef } from "react";
 
-export default forwardRef(function Input({ isTextarea, label, ...props }, ref) {
-    const classes = "w-full p-1 border-b-2 rounded-sm border-stone-300 bg-stone-200 text-stone-600 focus:outline-none focus:border-stone-600"
+const Input = forwardRef(function Input({ isTextarea, label, ...props }, ref) {
+    const classes = "w-full p-2 border-b-2 rounded-t-md border-slate-700 bg-slate-800 text-slate-200 focus:outline-none focus:border-indigo-500 transition-all focus:bg-slate-700/50";
 
     return (
         <p className="flex flex-col gap-1 my-4">
-
-            <label className="text-sm font-bold uppercase text-stone-500">{label}</label>
-            {isTextarea ? <textarea ref={ref} className={classes} {...props}></textarea> : <input ref={ref} className={classes} {...props} />}
-
+            <label className="text-sm font-bold uppercase text-slate-500">{label}</label>
+            {isTextarea ? (
+                <textarea ref={ref} className={classes} {...props} rows={4} />
+            ) : (
+                <input ref={ref} className={classes} {...props} />
+            )}
         </p>
-    )
-}
-)
+    );
+});
+
+export default Input;
